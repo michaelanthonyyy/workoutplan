@@ -25,12 +25,26 @@ app.post("/api/workouts", (req, res) => {
     });
 });
 
+app.get("/api/workouts/range", (req, res) => {
+    db.Workout.find({})
+    .limit(50)
+    .populate()
+    .then(dbWorkout => {
+        res.json(dbWorkout);
+    }).catch(err => {
+        res.json(err)
+    })
+});
 
-// update workout data app.put
-// app.put("/api/workouts/:id", ({body}, res) => {
-//     Workout.findByIdAndUpdate({}, { $push: })
-// });
+app.put("/api/workouts/:id", ({ body, params }, res) => {
+    console.log(body)
+    db.Workout.findByIdAndUpdate(params.id,
+        { $push: { exercises: body } }, { new: true })
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        }).catch(err => {
+            res.json(err);
+        })
+});
 
-
-// populate with range ? app.get
 };
