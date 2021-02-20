@@ -1,3 +1,4 @@
+const { Workout } = require("../models");
 const db = require("../models");
 
 module.exports = function (app) {  
@@ -16,7 +17,7 @@ app.get("/api/workouts", (req, res) => {
 
 // create new workout app.post
 app.post("/api/workouts", (req, res) => {
-    db.Workout.create(req.body)
+    db.Workout.create({})
     .then((dbWorkout) => {
         res.json(dbWorkout);
     }).catch((err) => {
@@ -26,11 +27,9 @@ app.post("/api/workouts", (req, res) => {
 
 
 // update workout data app.put
-app.put("/api/workouts/:id", (req, res) => {
-    var id = req.params.id;
-    db.Workout.create(req.body)
-    .then
-});
+// app.put("/api/workouts/:id", ({body}, res) => {
+//     Workout.findByIdAndUpdate({}, { $push: })
+// });
 
 
 // populate with range ? app.get
