@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
 
+const db = require("./models");
+
 const app = express();
 
 app.use(logger("dev"));
@@ -13,33 +15,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbExample", { useNewUrlParser: true });
-
-/////////// HTML ROUTES //////////////
-// Exercise HTML 
-app.get("/exercise", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/exercise.html"));
-});
-
-// Stats HTML
-app.get("/stats", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/stats.html"));
-});
-
-// route for workout data app.get 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouttracker", { useNewUrlParser: true });+
 
 
-// update workout data app.put
-
-
-// populate page with workout data app.put
-
-
-// create new workout app.post
-
-
-// populate with range ? app.get
-
+require("./routes/html-routes.js")(app);
+require("./routes/api-routes.js")(app);
 
 
 app.listen(PORT, () => {
