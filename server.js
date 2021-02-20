@@ -15,12 +15,16 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbExample", { useNewUrlParser: true });
 
+/////////// HTML ROUTES //////////////
+// Exercise HTML 
+app.get("/exercise", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/exercise.html"));
+});
 
-// Route for exercise html app.get
-
-
-// Route for stats html app.get
-
+// Stats HTML
+app.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/stats.html"));
+});
 
 // route for workout data app.get 
 
